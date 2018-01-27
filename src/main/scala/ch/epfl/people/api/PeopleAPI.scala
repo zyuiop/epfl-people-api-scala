@@ -19,6 +19,14 @@ object PeopleAPI {
     implicit var formatter: Reads[Person] = new PersonSerializer
   }
 
+  trait BackendAPI {
+    def search(q: String, locale: String = "en"): String
+  }
+
+  object BackendAPI {
+    implicit val defaultApi: BackendAPI = new BackendAPIImpl
+  }
+
   private class BackendAPIImpl extends BackendAPI {
     private val API_URL: String = "https://search.epfl.ch/json/ws_search.action"
 
@@ -35,7 +43,7 @@ object PeopleAPI {
         val map = o.value
         try {
           JsSuccess(Person(map("email").as[String], map("firstname").as[String], map("name").as[String],
-            map("profile").as[String], map("sciper").as[Int], o))
+            map("profile").as[String], map("sciper").as[String].toInt, o))
         } catch {
           case JsResultException(msg) => JsError(msg)
         }
@@ -43,7 +51,6 @@ object PeopleAPI {
     }
   }
 
-  private implicit var api: BackendAPI = new BackendAPIImpl
 
   /**
     * Returns a raw [[JsValue]] (most of the times it will be a [[JsArray]]) of the profiles matching the given query.<br/>

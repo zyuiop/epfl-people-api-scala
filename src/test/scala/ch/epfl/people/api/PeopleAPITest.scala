@@ -1,6 +1,6 @@
 package ch.epfl.people.api
 
-import ch.epfl.people.api.PeopleAPI.Person
+import ch.epfl.people.api.PeopleAPI._
 import org.scalatest._
 import play.api.libs.json._
 
@@ -14,19 +14,19 @@ class PeopleAPITest extends FlatSpec with Matchers {
       "firstname" -> JsString("Alice"),
       "profile" -> JsString("alice.ecila"),
       "name" -> JsString("Ecila"),
-      "sciper" -> JsNumber(123456)))),
+      "sciper" -> JsString("123456")))),
     Person("bob@epfl.ch", "Bob", "Fanta", "bob.fanta", 234567, JsObject(Seq(
       "email" -> JsString("bob@epfl.ch"),
       "firstname" -> JsString("Bob"),
       "profile" -> JsString("bob.fanta"),
       "name" -> JsString("Fanta"),
-      "sciper" -> JsNumber(234567)))),
+      "sciper" -> JsString("234567")))),
     Person("cecile@epfl.ch", "Cecile", "Elicec", "cecile.elicec", 345678, JsObject(Seq(
       "email" -> JsString("cecile@epfl.ch"),
       "firstname" -> JsString("Cecile"),
       "profile" -> JsString("cecile.elicec"),
       "name" -> JsString("Elicec"),
-      "sciper" -> JsNumber(345678)))),
+      "sciper" -> JsString("345678")))),
 
   )
 
